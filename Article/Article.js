@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Some Random Stuff Here',
+    date: 'Jan 8th 2000',
+    firstParagraph:'Dagobah hutt jawa leia calamari ventress skywalker yoda. Binks wicket hutt coruscant sidiousnaboo ackbar tatooine. Hutt lars padmé darth. Maul solo darth darth jabba qui-gon chewbacca darth maul. Moff baba wickethan. C-3po antilles moff qui-gon ahsoka aayla dooku amidala. Palpatine droid amidala droid k-3po twilek padmé wookiee. Leiamoff calamari mon obi-wan. Solo grievous lando coruscant. Jinn darth palpatine obi-wan mon.',
+
+    secondParagraph:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Nisl pretium fusce id velit ut tortor. Mi quis hendrerit dolor magna eget. Tellus orci ac auctor augue mauris augue. Viverra aliquet eget sit amet tellus. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Eget felis eget nunc lobortis. Maecenas sed enim ut sem viverra. Ultrices gravida dictum fusce ut placerat. Montes nascetur ridiculus mus mauris vitae ultricies. Dolor sed viverra ipsum nunc aliquet bibendum enim. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Enim lobortis scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat. Nunc sed id semper risus in hendrerit. Id neque aliquam vestibulum morbi.',
+
+    thirdParagraph:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Nisl pretium fusce id velit ut tortor. Mi quis hendrerit dolor magna eget. Tellus orci ac auctor augue mauris augue. Viverra aliquet eget sit amet tellus. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Eget felis eget nunc lobortis. Maecenas sed enim ut sem viverra. Ultrices gravida dictum fusce ut placerat. Montes nascetur ridiculus mus mauris vitae ultricies. Dolor sed viverra ipsum nunc aliquet bibendum enim. Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Enim lobortis scelerisque fermentum dui faucibus in. Donec et odio pellentesque diam volutpat. Nunc sed id semper risus in hendrerit. Id neque aliquam vestibulum morbi.',
   }
 ];
 
@@ -112,3 +121,46 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function buildArticle(articleAttrs) {
+  const {title, date, firstParagraph, secondParagraph, thirdParagraph} = articleAttrs
+
+  const article = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const articlePara1 = document.createElement('p')
+  const articlePara2 = document.createElement('p')
+  const articlePara3 = document.createElement('p')
+  const button = document.createElement('span')
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(articlePara1)
+  article.appendChild(articlePara2)
+  article.appendChild(articlePara3)
+  article.appendChild(button)
+
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  button.classList.add('expandButton')
+
+  button.textContent = 'Show More'
+  articleTitle.textContent = title
+  articleDate.textContent = date
+  articlePara1.textContent = firstParagraph
+  articlePara2.textContent = secondParagraph
+  articlePara3.textContent = thirdParagraph
+
+  button.addEventListener('click', event =>{
+    article.classList.toggle('article-open')
+  })
+
+  return article
+}
+
+const articles = document.querySelector('.articles')
+
+data.forEach(articleAttrs => {
+  const article = buildArticle(articleAttrs)
+  articles.appendChild(article)
+})
